@@ -11,48 +11,53 @@ struct HomeBottomCTA: View {
     private let cartCount = 1
     
     var body: some View {
-        CardContainer {
-            HStack {
-                HStack (spacing: 16) {
-                    Image(systemName: "cart.fill")
-                        .foregroundStyle(Color.blue)
-                        .padding(12)
-                        .background(Color.blue.opacity(0.12), in: Circle())
-                        .overlay(alignment: .topTrailing) {
-                            if cartCount > 0 {
-                                Text("\(cartCount)")
-                                    .font(.caption2.weight(.bold))
-                                    .foregroundStyle(.white)
-                                    .padding(.horizontal, 5)
-                                    .frame(minWidth: 18, minHeight: 18)
-                                    .background(Color.blue, in: Capsule())
-                                    .offset(x: 4, y: -4)
-                            }
+        Button {
+            print("haw")
+        } label: {
+            HStack(spacing: 12) {
+                Image(systemName: "cart.fill")
+                    .foregroundStyle(.white)
+                    .padding(10)
+                    .background(Color.white.opacity(0.2), in: Circle())
+                    .overlay(alignment: .topTrailing) {
+                        if cartCount > 0 {
+                            Text("\(cartCount)")
+                                .font(.caption2.weight(.bold))
+                                .foregroundStyle(Color.appPrimary)
+                                .padding(.horizontal, 5)
+                                .frame(minWidth: 18, minHeight: 18)
+                                .background(Color.white, in: Capsule())
+                                .offset(x: 4, y: -4)
                         }
-                    
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("1 item in order")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        Text("$12.00 total")
-                            .font(.subheadline.weight(.semibold))
                     }
-                }
 
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("1 item in order")
+                        .font(.caption)
+                        .foregroundStyle(.white.opacity(0.85))
+                    Text("$12.00 total")
+                        .font(.subheadline.weight(.bold))
+                        .foregroundStyle(.white)
+                }
 
                 Spacer()
 
-                Button {
-                    print("haw")
-                } label: {
+                HStack(spacing: 4) {
+                    Text("Checkout")
+                        .font(.subheadline.weight(.bold))
                     Image(systemName: "chevron.right")
-                        .padding()
+                        .font(.caption.weight(.bold))
                 }
-                .foregroundStyle(Color.white)
-                .background(Color.blue)
-                .clipShape(.circle)
+                .foregroundStyle(.white)
+                .padding(.trailing, 4)
             }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 10)
+            .frame(maxWidth: .infinity)
+            .background(Color.appPrimary, in: Capsule())
+            .shadow(color: Color.appPrimary.opacity(0.35), radius: 10, x: 0, y: 5)
         }
+        .buttonStyle(CardButtonStyle())
         .padding(.horizontal)
         .padding(.bottom, 16)
     }

@@ -23,7 +23,9 @@ struct HomeReorderCard: View {
                 HStack (alignment: .top, spacing: 14) {
                     VStack (alignment: .leading, spacing: 10) {
                         BadgeChip(text: "Favorite Meal", icon: "heart.fill", color: .brown)
+                        
                         Text("Grilled Teriyaki").font(.title2).fontWeight(.bold)
+                        
                         Text(dummyCategories.joined(separator: " • "))
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
@@ -38,7 +40,7 @@ struct HomeReorderCard: View {
                 HStack (alignment: .center) {
                     HStack {
                         Image(systemName: "clock")
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(.primary)
                         Text(
                             "Ready for pickup at 12:00 AM"
                         )
@@ -47,7 +49,7 @@ struct HomeReorderCard: View {
                     
                     Spacer()
                     
-                    BadgeChip(text: "Building 4", color: .blue)
+                    BadgeChip(text: "Building 4", color: .appPrimary)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, 12)
@@ -66,7 +68,7 @@ struct HomeReorderCard: View {
                     .padding(.vertical, 12)
                 }
                 .foregroundStyle(Color.white)
-                .background(Color.blue)
+                .background(Color.appPrimary)
                 .clipShape(.rect(cornerRadius: 10))
             }
         }

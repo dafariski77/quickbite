@@ -38,7 +38,7 @@ struct CategoryTabBar: View {
                         .background {
                             if isSelected {
                                 Capsule()
-                                    .fill(Color.accentColor)
+                                    .fill(Color.appPrimary)
                                     .matchedGeometryEffect(id: "ACTIVE_TAB", in: animation)
                             }
                         }
@@ -46,7 +46,7 @@ struct CategoryTabBar: View {
                 .buttonStyle(.plain)
             }
         }
-        .padding(4)
-        .background(Color(.secondarySystemGroupedBackground), in: Capsule())
+        .padding(6)
+        .background(Color(.systemGroupedBackground), in: Capsule())
     }
 }
