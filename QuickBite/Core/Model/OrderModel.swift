@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct OrderModel {
+    var id: UUID
+    var pickupCode: String
+    var userId: UUID
+    var user: EmployeeModel
+}

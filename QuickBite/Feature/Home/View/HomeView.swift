@@ -8,8 +8,36 @@
 import SwiftUI
 
 struct HomeView: View {
+    private let dummyImage: String = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3PvAPlM3nPBwwSjhoxoNo4RTPUaj2PL0mKHDTPsLlR_axPapnK6Vhn5k&s=10"
+    
+    private let dummyCategories = [
+        "Bowl Rice",
+        "Less Sugar",
+        "Extra Meat",
+        "Spicy"
+    ]
+    
+    @State private var selectedCategory: MenuCategory = .all
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack(alignment: .bottom) {
+            ScrollView {
+                VStack(alignment: .leading) {
+                    HomeReorderCard()
+                    
+                    CategoryTabBar(selection: $selectedCategory)
+                    
+                    Text("Showing: \(selectedCategory.rawValue)")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .padding()
+                .padding(.bottom, 90)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+
+            HomeBottomCTA()
+        }
+        
     }
 }
 

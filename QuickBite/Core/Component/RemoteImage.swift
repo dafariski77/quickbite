@@ -1,18 +1,34 @@
-//
-//  RemoteImage.swift
-//  QuickBite
-//
-//  Created by Dafa Riski on 15/11/26.
-//
-
 import SwiftUI
 
 struct RemoteImage: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    let url: String
+    var width: CGFloat? = 80
+    var height: CGFloat? = 100
+    var cornerRadius: CGFloat = 16
 
-#Preview {
-    RemoteImage()
+    var body: some View {
+        AsyncImage(url: URL(string: url)) { phase in
+            switch phase {
+            case .empty:
+                ZStack {
+                    Color(.secondarySystemFill)
+                    ProgressView()
+                }
+            case .success(let image):
+                image
+                    .resizable()
+                    .scaledToFill()
+            case .failure:
+                ZStack {
+                    Color(.secondarySystemFill)
+                    Image(systemName: "photo")
+                        .foregroundStyle(.secondary)
+                }
+            @unknown default:
+                EmptyView()
+            }
+        }
+        .frame(width: width, height: height)
+        .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+    }
 }
