@@ -38,7 +38,11 @@ struct HomeView: View {
             HomeBottomCTA()
         }
         .sheet(isPresented: $isSheetOpen) {
-            
+            SheetAddMenu()
+                .presentationDragIndicator(.visible)
+                .presentationDetents([.medium, .large])
+                .presentationBackground(.white)
+                .presentationContentInteraction(.resizes)
         }
     }
 }
