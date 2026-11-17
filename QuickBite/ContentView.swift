@@ -15,8 +15,8 @@ struct ContentView: View {
                 HomeView()
             }
 
-            Tab("Orders", systemImage: "bag.fill") {
-                
+            Tab("Active Orders", systemImage: "bag.fill") {
+                OrderView()
             }
 
             Tab("History", systemImage: "newspaper.fill") {

@@ -15,6 +15,23 @@ struct HomeView: View {
         ZStack(alignment: .bottom) {
             ScrollView {
                 LazyVStack(alignment: .leading, pinnedViews: .sectionHeaders) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack(alignment: .center, spacing: 6) {
+                            Image(systemName: "circle.fill")
+                                .font(.caption2)
+                            Text("Next Express 11:40-11:50 AM")
+                                .font(.callout.weight(.semibold))
+                        }
+                        
+                        Text("Order early. Pick up fresh. Skip the queue.")
+                            .font(.subheadline.weight(.regular))
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(.appGreenLight)
+                    .foregroundStyle(.appGreenDark)
+                    .clipShape(.rect(cornerRadius: 14))
+                    
                     HomeReorderCard()
                     
                     Section {
