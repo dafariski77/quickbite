@@ -12,6 +12,10 @@ struct BagView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 28) {
                 VStack(alignment: .leading, spacing: 12) {
+                    Text("YOUR BAG")
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(.appPrimary)
+                    
                     Text("Make it your lunch.")
                         .font(.title.weight(.semibold))
                     Text("Review your choices before reserving a pickup window.")
