@@ -7,42 +7,69 @@
 
 import SwiftUI
 
-struct PrimaryButtonStyle: ButtonStyle {
+struct AppButtonStyle: ButtonStyle {
+    enum Variant {
+        case primary
+        case secondary
+        case danger
+        
+        var foregroundColor: Color {
+            switch self {
+            case .primary:   return .white
+            case .secondary: return .appPrimary
+            case .danger:    return .appRedDark
+            }
+        }
+        
+        var backgroundColor: Color {
+            switch self {
+            case .primary:   return .appPrimary
+            case .secondary: return .appPrimary.opacity(0.1)
+            case .danger:    return .appRedLight
+            }
+        }
+    }
+    
+    @Environment(\.isEnabled) private var isEnabled
+    let variant: Variant
+    let fullWidth: Bool
+    
+    init(variant: Variant, fullWidth: Bool = true) {
+        self.variant = variant
+        self.fullWidth = fullWidth
+    }
+    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 14)
-            .foregroundStyle(Color.white)
-            .background(Color.appPrimary)
-            .clipShape(.rect(cornerRadius: 10))
-            // Adds standard interactive feedback when pressed
-            .opacity(configuration.isPressed ? 0.85 : 1.0)
-            .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
             .font(.headline.weight(.semibold))
+            .frame(maxWidth: fullWidth ? .infinity : nil)
+            .padding(.vertical, 14)
+            .padding(.horizontal, fullWidth ? 0 : 20)
+            .foregroundStyle(variant.foregroundColor)
+            .background(variant.backgroundColor)
+            .clipShape(.rect(cornerRadius: 10))
+            .opacity(!isEnabled ? 0.5 : (configuration.isPressed ? 0.85 : 1.0))
+            .scaleEffect(configuration.isPressed && isEnabled ? 0.99 : 1.0)
+            .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
     }
 }
 
-// Optional extension for cleaner dot syntax (.buttonStyle(.primary))
-extension ButtonStyle where Self == PrimaryButtonStyle {
-    static var primary: PrimaryButtonStyle { PrimaryButtonStyle() }
-}
+// MARK: - Dot-Syntax Extensions
 
-struct SecondaryButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 14)
-            .foregroundStyle(Color.appPrimary)
-            .background(Color.appPrimary.opacity(0.1))
-            .clipShape(.rect(cornerRadius: 10))
-            // Adds standard interactive feedback when pressed
-            .opacity(configuration.isPressed ? 0.85 : 1.0)
-            .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
-            .font(.headline.weight(.semibold))
+extension ButtonStyle where Self == AppButtonStyle {
+    static var primary: AppButtonStyle { AppButtonStyle(variant: .primary) }
+    static var secondary: AppButtonStyle { AppButtonStyle(variant: .secondary) }
+    static var danger: AppButtonStyle { AppButtonStyle(variant: .danger) }
+    
+    static func primary(fullWidth: Bool) -> AppButtonStyle {
+        AppButtonStyle(variant: .primary, fullWidth: fullWidth)
     }
-}
-
-// Optional extension for cleaner dot syntax (.buttonStyle(.secondary))
-extension ButtonStyle where Self == SecondaryButtonStyle {
-    static var secondary: SecondaryButtonStyle { SecondaryButtonStyle() }
+    
+    static func secondary(fullWidth: Bool) -> AppButtonStyle {
+        AppButtonStyle(variant: .secondary, fullWidth: fullWidth)
+    }
+    
+    static func danger(fullWidth: Bool) -> AppButtonStyle {
+        AppButtonStyle(variant: .danger, fullWidth: fullWidth)
+    }
 }
