@@ -19,10 +19,6 @@ struct CardContainer<Content: View>: View {
             .padding(16)
             .background(Color(.secondarySystemGroupedBackground))
             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .stroke(Color.primary.opacity(0.08), lineWidth: 1)
-            )
             .shadow(color: Color.black.opacity(0.06), radius: 8, x: 0, y: 4)
     }
 }

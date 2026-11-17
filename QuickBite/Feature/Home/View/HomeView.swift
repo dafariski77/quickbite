@@ -33,6 +33,7 @@ struct HomeView: View {
                 .padding()
                 .padding(.bottom, 90)
             }
+            .background(.appBackground)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             
             HomeBottomCTA()
