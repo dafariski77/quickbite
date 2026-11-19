@@ -12,20 +12,23 @@ struct AppButtonStyle: ButtonStyle {
         case primary
         case secondary
         case danger
+        case dangerSolid
         
         var foregroundColor: Color {
             switch self {
-            case .primary:   return .white
-            case .secondary: return .appPrimary
-            case .danger:    return .appRedDark
+            case .primary:      return .white
+            case .secondary:    return .appPrimary
+            case .danger:       return .appRedDark
+            case .dangerSolid:  return .white
             }
         }
         
         var backgroundColor: Color {
             switch self {
-            case .primary:   return .appPrimary
-            case .secondary: return .appPrimary.opacity(0.1)
-            case .danger:    return .appRedLight
+            case .primary:      return .appPrimary
+            case .secondary:    return .appPrimary.opacity(0.1)
+            case .danger:       return .appRedLight
+            case .dangerSolid:  return .appRedDark
             }
         }
     }
@@ -60,6 +63,7 @@ extension ButtonStyle where Self == AppButtonStyle {
     static var primary: AppButtonStyle { AppButtonStyle(variant: .primary) }
     static var secondary: AppButtonStyle { AppButtonStyle(variant: .secondary) }
     static var danger: AppButtonStyle { AppButtonStyle(variant: .danger) }
+    static var dangerSolid: AppButtonStyle { AppButtonStyle(variant: .dangerSolid) }
     
     static func primary(fullWidth: Bool) -> AppButtonStyle {
         AppButtonStyle(variant: .primary, fullWidth: fullWidth)
@@ -71,5 +75,8 @@ extension ButtonStyle where Self == AppButtonStyle {
     
     static func danger(fullWidth: Bool) -> AppButtonStyle {
         AppButtonStyle(variant: .danger, fullWidth: fullWidth)
+    }    
+    static func dangerSolid(fullWidth: Bool) -> AppButtonStyle {
+        AppButtonStyle(variant: .dangerSolid, fullWidth: fullWidth)
     }
 }

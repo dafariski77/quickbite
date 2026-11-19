@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct OrderView: View {
+    @State var isShowCancelSheet: Bool = false
+    
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 28) {
@@ -173,7 +175,7 @@ struct OrderView: View {
                     .buttonStyle(.secondary)
                     
                     Button {
-                        
+                        isShowCancelSheet = true
                     } label: {
                         Text("Cancel order")
                     }
@@ -185,6 +187,9 @@ struct OrderView: View {
             .padding(.bottom, 32)
         }
         .background(.appBackground)
+        .sheet(isPresented: $isShowCancelSheet) {
+            CancelOrderSheet()
+        }
     }
 }
 
