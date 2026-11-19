@@ -17,10 +17,10 @@ struct ContentView: View {
 
             Tab("Active Orders", systemImage: "bag.fill") {
                 OrderView()
-            }
+            }            
 
             Tab("History", systemImage: "newspaper.fill") {
-                
+                HistoryView()
             }
         }
         .tint(Color.appPrimary)
